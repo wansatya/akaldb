@@ -1,0 +1,37 @@
+[package]
+name = "akaldb"
+version = "0.1.0"
+edition = "2021"
+description = "An installable reasoning database — store knowledge as context graphs, not flat vectors"
+license = "MIT"
+
+[dependencies]
+# Fast hashing for node/edge lookups — significantly faster than default SipHash
+# for non-cryptographic use cases (which is all we need for internal IDs)
+rustc-hash = "2"
+
+# JSON property storage — the spec requires nodes/edges to carry arbitrary JSON properties
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# SmallVec for adjacency lists — avoids heap allocation for nodes with ≤8 edges,
+# which covers the majority of real-world graph nodes (power-law distribution)
+smallvec = { version = "1", features = ["serde"] }
+
+# Lightweight HTTP server — only ~2K lines, no async runtime needed.
+# Perfect for the "single binary, zero-config" deployment model from SPECS.md.
+tiny_http = "0.12"
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[[bin]]
+name = "akaldb"
+path = "src/main.rs"
+
+[[bench]]
+name = "traversal"
+harness = false
+
+[[example]]
+name = "basic_usage"

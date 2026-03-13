@@ -1,0 +1,16 @@
+{
+  "name": "akaldb",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for AkalDB — an installable reasoning database",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test dist/test.js"
+  },
+  "keywords": ["graph", "database", "reasoning", "context", "knowledge-graph", "cql"],
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
